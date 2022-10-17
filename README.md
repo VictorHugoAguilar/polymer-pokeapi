@@ -1,6 +1,6 @@
-# \<poke-api\>
+# Pokedex
 
-
+App of example consumer api in polymer
 
 ## Install the Polymer-CLI
 
@@ -31,3 +31,8 @@ $ polymer test
 ```
 
 Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+
+# Demo
+
+![alt text](https://github.com/VictorHugoAguilar/polymer-pokeapi/blob/main/assets/demo/app_index.png?raw=true)
+![alt text](https://github.com/VictorHugoAguilar/polymer-pokeapi/blob/main/assets/demo/app_index_show.png?raw=true)
