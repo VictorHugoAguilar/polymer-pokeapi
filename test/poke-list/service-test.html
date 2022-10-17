@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
+
+        <title>poke-api test</title>
+
+        <script src="../../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+        <script src="../../bower_components/web-component-tester/browser.js"></script>
+
+        <script src="../../src/poke-list/service.js"></script>
+    </head>
+    <body>
+        <script>
+            suite("Run service", () => {
+                suite("when load the application the service is called", () => {
+                    let mySer;
+
+                    setup(() => {
+                        mySer = service;
+                    });
+
+                    teardown(() => {
+                        // runs after each test in this block
+                        mySer.getData.restore();
+                    });
+
+                    test("check that service return empty", (done) => {
+                        sinon.stub(mySer, "getData", () => {
+                            return {};
+                        });
+                        expect(mySer.getData()).to.not.throw;
+                        expect(mySer.getData()).to.be.empty;
+                        done();
+                    });
+
+                    test("check that service return correct object", (done) => {
+                        sinon.stub(mySer, "getData", () => {
+                            return [
+                                {
+                                    id: 1,
+                                    name: "bulbasaur",
+                                    sprites: {
+                                        back_default: "https://test",
+                                    },
+                                    abilities: [
+                                        {
+                                            ability: {
+                                                name: "overgrow",
+                                            },
+                                        },
+                                        {
+                                            ability: {
+                                                name: "chlorophyll",
+                                            },
+                                        },
+                                    ],
+                                    base_experience: 64,
+                                    effect: "This Pokémon's damaging",
+                                },
+                            ];
+                        });
+
+                        expect(mySer.getData()).to.not.throw;
+                        expect(mySer.getData()).to.deep.include({
+                            id: 1,
+                            name: "bulbasaur",
+                            sprites: {
+                                back_default: "https://test",
+                            },
+                            abilities: [
+                                {
+                                    ability: {
+                                        name: "overgrow",
+                                    },
+                                },
+                                {
+                                    ability: {
+                                        name: "chlorophyll",
+                                    },
+                                },
+                            ],
+                            base_experience: 64,
+                            effect: "This Pokémon's damaging",
+                        });
+
+                        // MATCH
+                        let spy = sinon.spy();
+                        spy(mySer.getData()[0]);
+
+                        sinon.assert.calledWith(spy, sinon.match({ id: 1 }));
+                        sinon.assert.calledWith(spy, sinon.match({ name: "bulbasaur" }));
+                        sinon.assert.calledWith(spy, sinon.match.has("base_experience", 64));
+
+                        done();
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

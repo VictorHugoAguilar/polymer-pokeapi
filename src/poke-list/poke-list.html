@@ -1,0 +1,58 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html" />
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html" />
+
+<link rel="import" href="../poke-card/poke-card.html" />
+<link rel="import" href="../poke-empty/poke-empty.html" />
+
+<dom-module id="poke-list">
+    <link rel="import" href="./poke-list.css" type="css" />
+
+    <template>
+        <div class="container">
+            <template is="dom-if" if="[[!_checkContainPokemons(pokemons)]]">
+                <poke-empty title="Sin Datos" message="No hay pokemons para mostrar"></poke-empty>
+            </template>
+
+            <template is="dom-if" if="[[_checkContainPokemons(pokemons)]]">
+                <template is="dom-repeat" items="[[pokemons]]" as="item">
+                    <poke-card pokemon="[[item]]"></poke-card>
+                </template>
+            </template>
+        </div>
+    </template>
+
+    <script src="service.js"></script>
+    <script>
+        class PokeList extends Polymer.Element {
+            static get is() {
+                return "poke-list";
+            }
+
+            static get properties() {
+                return {
+                    pokemons: { type: Object, value: () => [] },
+                };
+            }
+
+            constructor() {
+                super();
+            }
+
+            ready() {
+                super.ready();
+                this._chargedData();
+            }
+
+            _checkContainPokemons(pokemons) {
+                return pokemons && pokemons.length > 0;
+            }
+
+            _chargedData() {
+                this.pokemons = service.getData();
+            }
+        }
+
+        window.customElements.define(PokeList.is, PokeList);
+    </script>
+</dom-module>

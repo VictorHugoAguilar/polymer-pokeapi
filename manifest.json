@@ -1,0 +1,6 @@
+{
+  "name": "poke-api",
+  "short_name": "poke-api",
+  "start_url": "/",
+  "display": "standalone"
+}

@@ -1,0 +1,21 @@
+:host {
+    display: block;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    background-color: #de685e;
+    color: white;
+}
+.header h2 {
+    margin-left: 20px;
+}
+.body {
+    margin-top: 60px;
+}

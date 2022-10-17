@@ -1,0 +1,31 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../poke-list/poke-list.html" />
+
+<dom-module id="poke-api">
+    <link rel="import" href="./poke-api.css" type="css" />
+
+    <template>
+        <div class="container">
+            <div class="header">
+                <h2>Poke Api</h2>
+            </div>
+
+            <div class="body">
+                <poke-list></poke-list>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        class PokeApi extends Polymer.Element {
+            static get is() {
+                return "poke-api";
+            }
+            static get properties() {
+                return {};
+            }
+        }
+
+        window.customElements.define(PokeApi.is, PokeApi);
+    </script>
+</dom-module>

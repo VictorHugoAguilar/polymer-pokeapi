@@ -1,0 +1,57 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html" />
+
+<dom-module id="poke-card">
+    <link rel="import" href="./poke-card.css" type="css" />
+
+    <template>
+        <div class="container">
+            <div class="center">
+                <div class="card">
+                    <div class="additional">
+                        <div class="user-card">
+                            <div class="badge level">id: [[pokemon.id]]</div>
+                            <img src$="[[pokemon.sprites.front_default]]" />
+                            <div class="badge points">[[pokemon.base_experience]] exp</div>
+                        </div>
+                        <div class="more-info">
+                            <h1>[[pokemon.name]]</h1>
+                            <h4>Habilities</h4>
+                            <template is="dom-repeat" items="[[pokemon.abilities]]" as="item">
+                                <div class="coords">
+                                    <span> [[item.ability.name ]]</span>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="general">
+                        <h1>[[pokemon.name]]</h1>
+                        <p>[[pokemon.effect]]</p>
+                        <span class="more">Para más info posicionar el ratón encima de la card</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        class PokeCard extends Polymer.Element {
+            static get is() {
+                return "poke-card";
+            }
+            static get properties() {
+                return {
+                    pokemon: { type: Object, value: () => ({}) },
+                };
+            }
+            constructor() {
+                super();
+            }
+            ready() {
+                super.ready();
+            }
+        }
+
+        window.customElements.define(PokeCard.is, PokeCard);
+    </script>
+</dom-module>

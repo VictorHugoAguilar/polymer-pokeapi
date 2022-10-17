@@ -1,0 +1,35 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+
+<dom-module id="poke-empty">
+    <link rel="import" href="./poke-empty.css" type="css" />
+    <template>
+        <div class="container">
+            <div class="card">
+                <p class="title">[[title]]</p>
+                <p class="message">[[message]]</p>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        class PokeEmpty extends Polymer.Element {
+            static get is() {
+                return "poke-empty";
+            }
+            static get properties() {
+                return {
+                    title: String,
+                    message: String,
+                };
+            }
+            constructor() {
+                super();
+            }
+            ready() {
+                super.ready();
+            }
+        }
+
+        window.customElements.define(PokeEmpty.is, PokeEmpty);
+    </script>
+</dom-module>

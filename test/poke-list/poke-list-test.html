@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
+
+        <title>poke-api test</title>
+
+        <script src="../../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+        <script src="../../bower_components/web-component-tester/browser.js"></script>
+
+        <link rel="import" href="../../src/poke-list/poke-list.html" />
+    </head>
+    <body>
+        <test-fixture id="BasicTestFixture">
+            <template>
+                <poke-list></poke-list>
+            </template>
+        </test-fixture>
+
+        <script>
+            suite("List of pokemon", () => {
+                suite("when load the application", () => {
+                    let myEle;
+
+                    setup(() => {
+                        myEle = fixture("BasicTestFixture");
+                    });
+
+                    test("check that return a list empty of elements", (done) => {
+                        myEle.pokemons = {};
+                        flush(() => {
+                            const elementShadowRoot = myEle.shadowRoot;
+                            const elementHeader = elementShadowRoot.querySelector("poke-empty");
+                            expect(elementHeader.title).to.equals("Sin Datos");
+                            expect(elementHeader.message).to.equals("No hay pokemons para mostrar");
+                            done();
+                        });
+                    });
+
+                    test("check that launch charged of data once", (done) => {
+                        const spy = sinon.spy(myEle, "_chargedData");
+                        flush(() => {
+                            myEle.ready();
+                            expect(spy.calledOnce).to.be.true;
+                            done();
+                        });
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
