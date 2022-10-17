@@ -1,4 +1,4 @@
-# Pokedex
+# Pokédex
 
 App of example consumer api in polymer
 
